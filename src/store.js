@@ -59,10 +59,12 @@ export const store = new Vuex.Store({
         let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
         let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         let i =0
-        for( i = 0; i<5 ;i++){
-          d.setDate(d.getDate() + i)
+        state.dates[i] = days[ d.getDay()] +" "+ d.getDate() +" "+  months[d.getMonth()];
+        for( i = 1; i<5 ;i++){
+          d.setDate(d.getDate() + 1)
           state.dates[i] = days[ d.getDay()] +" "+ d.getDate() +" "+  months[d.getMonth()];
-          console.log("dates: "+ d)
+          console.log("i: " + 1)
+          console.log("dates: "+ days[ d.getDay()] +" "+ d.getDate() +" "+  months[d.getMonth()])
         }
         
       }
