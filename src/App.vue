@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <div v-if="$store.state.wait" class="wait"><span class="material-icons">search</span></div>
+    <div v-if="$store.state.isLoading" class="isLoading">
+      <span class="material-icons">search</span>
+    </div>
     <div v-else class="main">
       <Search />
       <Info />
@@ -18,14 +20,10 @@ export default {
     Search,
     Info
   },
-  created: function () {//Istanbul: https://www.metaweather.com/api/location/2344116/ +++ consolidated_weather
-                      //https://www.metaweather.com/api/location/search/?query=istan  city search
-
-    this.$store.commit("search",2344116);
-    this.$store.commit("dates",);
+  created: function () {
+    this.$store.commit("search",2344116);//2344116 Istanbul
+    this.$store.commit("days");
     this.$store.state.title = "Istanbul";
-    
-
   },
 }
 </script>
@@ -39,15 +37,14 @@ export default {
   color: #2c3e50;
   margin: 0;
 }
-.wait{
+.isLoading{
   display: flex;
   position: relative;
   justify-content: center;
   text-align: center;
   top: 300px;
-  
 }
-.wait span{
+.isLoading span{
   font-size: 50px;
   position: relative;
   display: block;

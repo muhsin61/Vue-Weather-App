@@ -1,13 +1,13 @@
 <template>
 <div class="main">
-    <div class="tempChgs">
-        <div class="tempChg1 tempChg" @click="tempCF('C')"><p>℃</p></div>
-        <div class="tempChg2 tempChg" @click="tempCF('F')"><p>℉</p></div>
+    <div class="tempChangeFtoC">
+        <div class="tempChg tempChg1" @click="tempCF('C')"><p>℃</p></div>
+        <div class="tempChg tempChg2" @click="tempCF('F')"><p>℉</p></div>
     </div>        
     <div class="days">
         <div class="day1 day">
             <h3>tomorrow</h3>
-            <img :src="$store.state.links[$store.state.cityWeather[1].weather_state_abbr]" alt="">
+            <img :src="$store.state.weatherImgLinks[$store.state.cityWeather[1].weather_state_abbr]" alt="">
             <div>
               <span class="min" v-if="$store.state.CtoF">{{Math.round($store.state.cityWeather[1].max_temp) }}°C&emsp;</span>  
               <span class="min" v-else>{{Math.round($store.state.cityWeather[1].max_temp * 1.8 +33)}}°F&nbsp;&nbsp;</span>
@@ -18,8 +18,8 @@
             
         </div>
         <div class="day2 day">
-            <h3>{{$store.state.dates[1]}}</h3>
-             <img :src="$store.state.links[$store.state.cityWeather[2].weather_state_abbr]" alt="">
+            <h3>{{$store.state.days[1]}}</h3>
+             <img :src="$store.state.weatherImgLinks[$store.state.cityWeather[2].weather_state_abbr]" alt="">
             <div>
               <span class="min" v-if="$store.state.CtoF">{{Math.round($store.state.cityWeather[2].max_temp) }}°C&nbsp;&nbsp;</span>  
               <span class="min" v-else>{{Math.round($store.state.cityWeather[2].max_temp * 1.8 +33)}}°F&nbsp;&nbsp;</span>
@@ -29,8 +29,8 @@
             </div>
         </div>
         <div class="day3 day">
-            <h3>{{$store.state.dates[2]}}</h3>
-             <img :src="$store.state.links[$store.state.cityWeather[3].weather_state_abbr]" alt="">
+            <h3>{{$store.state.days[2]}}</h3>
+             <img :src="$store.state.weatherImgLinks[$store.state.cityWeather[3].weather_state_abbr]" alt="">
             <div>
               <span class="min" v-if="$store.state.CtoF">{{Math.round($store.state.cityWeather[3].max_temp) }}°C&nbsp;&nbsp;</span>  
               <span class="min" v-else>{{Math.round($store.state.cityWeather[3].max_temp * 1.8 +33)}}°F&nbsp;&nbsp;</span>
@@ -40,8 +40,8 @@
             </div>
         </div>
         <div class="day4 day">
-            <h3>{{$store.state.dates[3]}}</h3>
-             <img :src="$store.state.links[$store.state.cityWeather[4].weather_state_abbr]" alt="">
+            <h3>{{$store.state.days[3]}}</h3>
+             <img :src="$store.state.weatherImgLinks[$store.state.cityWeather[4].weather_state_abbr]" alt="">
             <div>
               <span class="min" v-if="$store.state.CtoF">{{Math.round($store.state.cityWeather[4].max_temp) }}°C&nbsp;&nbsp;</span>  
               <span class="min" v-else>{{Math.round($store.state.cityWeather[4].max_temp * 1.8 +33)}}°F&nbsp;&nbsp;</span>
@@ -51,8 +51,8 @@
             </div>
         </div>
         <div class="day5 day">
-            <h3>{{$store.state.dates[4]}}</h3>
-             <img :src="$store.state.links[$store.state.cityWeather[5].weather_state_abbr]" alt="">
+            <h3>{{$store.state.days[4]}}</h3>
+             <img :src="$store.state.weatherImgLinks[$store.state.cityWeather[5].weather_state_abbr]" alt="">
             <div>
               <span class="min" v-if="$store.state.CtoF">{{Math.round($store.state.cityWeather[5].max_temp) }}°C&nbsp;&nbsp;</span>  
               <span class="min" v-else>{{Math.round($store.state.cityWeather[5].max_temp * 1.8 +33)}}°F&nbsp;&nbsp;</span>
@@ -69,30 +69,30 @@
     </div>
 
     <div class="infos">
-        <div class="info1 info">
+        <div class="info">
             <h1>Wind status</h1>
-            <h2><span >{{Math.round($store.state.cityWeather[0].wind_speed)}}</span><span class="cinfo">mph</span></h2>
-            <div class="esDiv" :style="{ transform: 'rotate(' + Math.round($store.state.cityWeather[0].wind_direction) +'deg)'}"><span class="material-icons es">navigation</span></div><span class="wnm">&nbsp;{{$store.state.cityWeather[0].wind_direction_compass}}</span>
+            <h2><span >{{Math.round($store.state.cityWeather[0].wind_speed)}}</span><span class="infoName">mph</span></h2>
+            <div class="windDirection" :style="{ transform: 'rotate(' + Math.round($store.state.cityWeather[0].wind_direction) +'deg)'}"><span class="material-icons windIcon">navigation</span></div>
+            <span class="windDirectionName">&nbsp;{{$store.state.cityWeather[0].wind_direction_compass}}</span>
         </div>
-        <div class="info2 info">
+        <div class="info">
             <h1>Humidity</h1>
-            <h2>{{Math.round($store.state.cityWeather[0].humidity)}}<span class="cinfo">%</span></h2>
-            <div class="hum">
-                <div class="huma">
-                    <span class="huma1">0</span><span class="huma2">50</span><span class="huma3">100</span>
-                    <div class="cizgi"><div :style="{width: $store.state.cityWeather[0].humidity + '%' }" class="rcizgi" ></div></div>
-                    <span class="huma4">%</span>
+            <h2>{{Math.round($store.state.cityWeather[0].humidity)}}<span class="infoName">%</span></h2>
+            <div class="humidity">
+                <div class="humidityInfo">
+                    <span class="humi0">0</span><span>50</span><span class="humi100">100</span>
+                    <div class="lineDiv"><div :style="{width: $store.state.cityWeather[0].humidity + '%' }" class="line" ></div></div>
+                    <span class="humiPerCent">%</span>
                 </div>
-
             </div>
         </div>
-        <div class="info3 info">
+        <div class="info">
             <h1>Visibility</h1>
-            <h2>{{Math.round($store.state.cityWeather[0].visibility)}}<span class="cinfo">miles</span></h2>
+            <h2>{{Math.round($store.state.cityWeather[0].visibility)}}<span class="infoName">miles</span></h2>
         </div>
-        <div class="info3 info">
+        <div class="info">
             <h1>Air Pressure</h1>
-            <h2>{{Math.round($store.state.cityWeather[0].air_pressure)}}<span class="cinfo">mb</span></h2>
+            <h2>{{Math.round($store.state.cityWeather[0].air_pressure)}}<span class="infoName">mb</span></h2>
         </div>
         <p>muhsin61@DevChalllenges.io</p>
     </div>
@@ -111,9 +111,11 @@ export default {
     methods:{
         tempCF(cf){
             if(cf==="C"){
-              this.$store.state.CtoF = true;  
+                this.$store.state.CtoF = true;  
             }
-            else{this.$store.state.CtoF = false; }
+            else{
+                this.$store.state.CtoF = false; 
+                }
         }
     }
 }
@@ -126,7 +128,7 @@ export default {
     background: #100E1D;
     height: auto;
 }
-.tempChgs{
+.tempChangeFtoC{
     text-align: right;
     position: relative;
     top: 10px;
@@ -193,6 +195,36 @@ export default {
     position: relative;
     width: 70%;
 }
+.min{
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: #E7E7EB;
+}
+.max{
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: #A09FB1;
+}
+.todays{
+    position: relative;
+    width: 100%;
+    left: 12%;
+}
+.todays h1{
+    float: left;
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 28px;
+    color: #E7E7EB;
+}
 .infos{
     text-align: center;
     float: left;
@@ -232,37 +264,7 @@ export default {
     padding: 0;
     margin: 0;
 }
-.min{
-    font-family: Raleway;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 19px;
-    color: #E7E7EB;
-}
-.max{
-    font-family: Raleway;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 19px;
-    color: #A09FB1;
-}
-.todays{
-    position: relative;
-    width: 100%;
-    left: 12%;
-}
-.todays h1{
-    float: left;
-    font-family: Raleway;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 24px;
-    line-height: 28px;
-    color: #E7E7EB;
-}
-.cinfo{
+.infoName{
     font-family: Raleway;
     font-style: normal;
     font-weight: bold;
@@ -271,7 +273,18 @@ export default {
     text-align: center;
     color: #E7E7EB;
 }
-.wnm{
+.windDirection{
+    display: inline-block;
+    width: 29.49px;
+    height: 29.49px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+}
+.windIcon{
+    padding: 0;
+    margin: 0;
+}
+.windDirectionName{
     font-family: Raleway;
     font-style: normal;
     font-weight: 500;
@@ -279,36 +292,10 @@ export default {
     line-height: 16px;
     color: #E7E7EB;
 }
-.esDiv{
-    display: inline-block;
-    width: 29.49px;
-    height: 29.49px;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 50px;
-}
-.es{
-    padding: 0;
-    margin: 0;
-}
-.hum{
+.humidity{
     text-align: center;
 }
-.huma{
-    position: relative;
-    left: 10%;
-    width: 80%;
-    text-align: center;
-}
-.huma1{
-    float: left;
-}
-.huma3{
-    float: right;
-}
-.huma4{
-    float: right;
-}
-.huma span{
+.humidityInfo span{
     font-family: Raleway;
     font-style: normal;
     font-weight: bold;
@@ -317,14 +304,29 @@ export default {
     text-align: center;
     color: #A09FB1;
 }
-.cizgi{
+.humidityInfo{
+    position: relative;
+    left: 10%;
+    width: 80%;
+    text-align: center;
+}
+.humi0{
+    float: left;
+}
+.humi100{
+    float: right;
+}
+.humiPerCent{
+    float: right;
+}
+.lineDiv{
     position: relative;
     width: 100%;
     height: 8px;
     border-radius: 5px;
     background: #E7E7EB;
 }
-.rcizgi{
+.line{
     position: relative;
     height: 8px;
     width: 50%;
