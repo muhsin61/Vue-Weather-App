@@ -1,5 +1,7 @@
 # Demo: https://vueweatherapp.onrender.com/
 # Responsive
+vue vuex vue-router
+
 # weatherapp
 
 ## Project setup
