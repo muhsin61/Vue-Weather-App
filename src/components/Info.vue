@@ -94,7 +94,6 @@
             <h1>Air Pressure</h1>
             <h2>{{Math.round($store.state.cityWeather[0].air_pressure)}}<span class="infoName">mb</span></h2>
         </div>
-        <p>muhsin61@DevChalllenges.io</p>
     </div>
     
 </div>
